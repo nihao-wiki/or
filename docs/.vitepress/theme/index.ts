@@ -37,9 +37,9 @@ export default {
   },
   Layout() {
     return h(defaultTheme.Layout, null, {
-      'home-hero-image': () => h(HomeHeroImage),
-      'home-hero-after': () => h(Latest),
-      'doc-footer-before': () => h(References),
+      // 'home-hero-image': () => h(HomeHeroImage),
+      // 'home-hero-after': () => h(Latest),
+      // 'doc-footer-before': () => h(References),
       // 'aside-ads-before': () => h(Ads),
       'nav-bar-content-after': () => h(CurrencyBar),
       'nav-screen-content-after': () => h(CurrencyScreen),
