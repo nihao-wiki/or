@@ -1,14 +1,11 @@
 import { defineConfig } from 'vitepress';
 import { fileURLToPath, URL } from 'node:url';
 import { getLocaleDefinition } from './utils';
-import locales from './locales';
 
 const { lang, hostname, ...configs } = getLocaleDefinition();
-const devConfigs = process.env.NODE_ENV === 'development' ? { locales, srcExclude: [] } : {};
 
 export default defineConfig({
   ...configs,
-  ...devConfigs,
   lang,
   title: 'Oriental Road',
   cleanUrls: true,
