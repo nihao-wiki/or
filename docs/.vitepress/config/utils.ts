@@ -1,29 +1,37 @@
 import type {} from '.';
-import locales from './locales';
+import { lang, langRoot, locales } from '../constants/locales';
+import { hostname } from '../constants/meta';
 
-interface LocaleDefinition {
-  hostname: string;
-  rewrites: {
-    [path: string]: string;
-  };
-  srcExclude: string[];
+export function getHreflang(): any[] {
+  return [
+    ...Object.keys(locales)
+      .filter((key) => key !== 'root')
+      .map((hreflang) => [
+        'link',
+        { rel: 'alternate', href: `${hostname}/${hreflang}/`, hreflang },
+      ]),
+    ['link', { rel: 'alternate', href: `${hostname}/`, hreflang: 'x-default' }],
+  ];
 }
 
-export function getLocaleDefinition(): LocaleDefinition {
-  const [, , command, , lang = 'en'] = process.argv;
-  const isDev = command === 'dev';
-  const config = require(`../../${lang}/config.ts`);
+export function getLocales() {
+  for (const lang in locales) {
+    const dir = lang === 'root' ? 'en' : lang;
+    const config = require(`../../${dir}/config.ts`);
+    locales[lang] = {
+      ...config.default,
+      ...locales[lang],
+    };
+  }
+  return locales;
+}
+
+export function getLocalesRewrite() {
   return {
-    ...config,
-    hostname: `https://${lang === 'en' ? 'www' : lang}.orientalroad.com`,
-    rewrites: {
-      [`${lang}/:rest*`]: ':rest*',
-    },
-    locales: isDev ? locales : {},
-    srcExclude: isDev
-      ? []
-      : Object.keys(locales)
-          .filter((key) => !['root', lang].includes(key))
-          .map((lang) => `**/${lang}/**`),
+    [`${langRoot}/:rest*`]: ':rest*',
   };
+}
+
+export function getLang() {
+  return lang;
 }

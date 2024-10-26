@@ -1,5 +1,10 @@
 :root {
+  /* sync with .vitepress/config/index.ts head link theme-color */
   --vp-c-brand-1: #0a5fde;
   --vp-c-brand-2: #3182eb;
   --vp-c-brand-3: #5ca4f7;
+}
+
+.VPNav {
+  position: relative !important;
 }
