@@ -2,8 +2,18 @@ export const lang = 'en-XX';
 export const langRoot = 'en';
 
 export const locales = {
-  root: { label: 'English', lang: 'en-XX', redirectTemplate: 'We noticed your browser language is set to English. Visit our :locale site for the best experience.' },
-  ja: { label: '日本語', lang: 'ja-JP', redirectTemplate: 'ブラウザの言語設定が 日本語 です。最良の体験のために、:locale サイトをご利用ください。' },
+  root: {
+    label: 'English',
+    lang: 'en-XX',
+    redirectTemplate:
+      'We noticed your browser language is set to English. Visit our :locale site for the best experience.',
+  },
+  ja: {
+    label: '日本語',
+    lang: 'ja-JP',
+    redirectTemplate:
+      'ブラウザの言語設定が 日本語 です。最良の体験のために、:locale サイトをご利用ください。',
+  },
   // ko: { label: '한국어', lang: 'ko-KR' },
   // th: { label: 'ภาษาไทย', lang: 'th-TH' },
   // ms: { label: 'Bahasa Melayu', lang: 'ms-MY' },
@@ -41,5 +51,9 @@ export const currencies = {
   MYR: {
     ratio: 4.34,
     unit: 'RM',
+  },
+  SGD: {
+    ratio: 1.32,
+    unit: '$',
   },
 };

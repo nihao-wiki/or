@@ -16,7 +16,7 @@ if (primary !== localeIndex.value) {
       if (redirectTemplate) {
         redirect.value = redirectTemplate.replace(
           ':locale',
-          `<a href="${hostname}/${lang}/"><b>${label}</b></a>`
+          `<a href="${hostname}/${lang}/" hreflang="${lang}">${hostname}/${lang}/</a>`
         );
       }
       return false;
@@ -30,7 +30,7 @@ if (primary !== localeIndex.value) {
   <div v-if="redirect" class="banner-content" v-html="redirect" />
 </template>
 
-<style scoped>
+<style>
 .banner-content {
   font-size: 14px;
   padding: 0 16px;
@@ -42,5 +42,10 @@ if (primary !== localeIndex.value) {
 
 .banner-content + .VPNav {
   background-color: red;
+}
+
+.banner-content a {
+  font-weight: bold;
+  text-decoration: underline;
 }
 </style>
