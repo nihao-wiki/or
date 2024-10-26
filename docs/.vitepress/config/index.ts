@@ -41,8 +41,10 @@ export default defineConfig({
     resolve: {
       alias: [
         {
-          find: /^.*\/VPFooter\.vue$/,
-          replacement: fileURLToPath(new URL('../theme/components/VPFooter.vue', import.meta.url)),
+          find: /^.*\/VPNavBarTranslations\.vue$/,
+          replacement: fileURLToPath(
+            new URL('../theme/components/overrides/VPNavBarTranslations.vue', import.meta.url)
+          ),
         },
       ],
     },

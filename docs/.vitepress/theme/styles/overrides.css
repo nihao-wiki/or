@@ -4,3 +4,7 @@
   --vp-c-brand-2: #3182eb;
   --vp-c-brand-3: #5ca4f7;
 }
+
+.VPNav {
+  position: relative !important;
+}

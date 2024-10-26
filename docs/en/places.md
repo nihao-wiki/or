@@ -1,4 +1,5 @@
 ---
+layout: places
 titleTemplate: 'China Travel Destinations - :title'
 ---
 
