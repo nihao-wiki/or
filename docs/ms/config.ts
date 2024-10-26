@@ -6,7 +6,15 @@ export default defineConfig({
   themeConfig: {
     nav: [
       {
-        text: 'Destinasi Pelancongan',
+        text: 'Destinasi',
+        items: [],
+      },
+      {
+        text: 'Perancangan',
+        items: [],
+      },
+      {
+        text: 'Inspirasika',
         items: [],
       },
     ],

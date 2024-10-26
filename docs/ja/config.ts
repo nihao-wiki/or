@@ -6,7 +6,15 @@ export default defineConfig({
   themeConfig: {
     nav: [
       {
-        text: '観光地',
+        text: '目的地',
+        items: [],
+      },
+      {
+        text: '旅程計画',
+        items: [],
+      },
+      {
+        text: 'インスピレーション',
         items: [],
       },
     ],

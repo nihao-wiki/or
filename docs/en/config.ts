@@ -9,6 +9,14 @@ export default defineConfig({
         text: 'Destinations',
         items: [],
       },
+      {
+        text: 'Planning',
+        items: [],
+      },
+      {
+        text: 'Inspiration',
+        items: [],
+      },
     ],
   },
 });

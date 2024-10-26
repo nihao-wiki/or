@@ -6,7 +6,15 @@ export default defineConfig({
   themeConfig: {
     nav: [
       {
-        text: '관광지',
+        text: '목적지',
+        items: [],
+      },
+      {
+        text: '여정 계획',
+        items: [],
+      },
+      {
+        text: '여행의 영감',
         items: [],
       },
     ],

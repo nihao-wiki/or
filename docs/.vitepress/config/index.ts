@@ -3,8 +3,6 @@ import { fileURLToPath, URL } from 'node:url';
 import { getLang, getLocalesRewrite, getHreflang, getLocales } from './utils';
 import { title, hostname } from '../constants/meta';
 
-console.log(getLocales());
-
 export default defineConfig({
   lang: getLang(),
   title,
