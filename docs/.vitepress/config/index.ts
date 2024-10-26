@@ -2,11 +2,10 @@ import { defineConfig } from 'vitepress';
 import { fileURLToPath, URL } from 'node:url';
 import { getLocaleDefinition } from './utils';
 
-const { lang, hostname, ...configs } = getLocaleDefinition();
+const { hostname, ...configs } = getLocaleDefinition();
 
 export default defineConfig({
   ...configs,
-  lang,
   title: 'Oriental Road',
   cleanUrls: true,
   appearance: false,
