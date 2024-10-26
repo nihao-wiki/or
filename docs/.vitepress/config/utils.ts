@@ -3,7 +3,6 @@ import locales from './locales';
 
 interface LocaleDefinition {
   hostname: string;
-  lang: string;
   rewrites: {
     [path: string]: string;
   };
@@ -17,7 +16,6 @@ export function getLocaleDefinition(): LocaleDefinition {
   return {
     ...config,
     hostname: `https://${lang === 'en' ? 'www' : lang}.orientalroad.com`,
-    lang,
     rewrites: {
       [`${lang}/:rest*`]: ':rest*',
     },
