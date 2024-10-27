@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { defineProps, defineEmits } from 'vue';
 
-const props = defineProps({
+defineProps({
+  width: {
+    type: Number,
+    default: 500,
+  },
   modelValue: {
     type: Boolean,
     default: false,
@@ -19,7 +23,7 @@ const closeModal = () => {
   <teleport to="body">
     <transition name="modal">
       <div v-if="modelValue" class="modal-overlay" @click="closeModal">
-        <div class="modal" @click.stop>
+        <div class="modal" :style="{ width: `${width}px` }" @click.stop>
           <slot></slot>
         </div></div
     ></transition>
@@ -47,7 +51,6 @@ const closeModal = () => {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
   width: 100%;
   transform: scale(0.95);
   transition: transform 0.3s ease, opacity 0.3s ease;

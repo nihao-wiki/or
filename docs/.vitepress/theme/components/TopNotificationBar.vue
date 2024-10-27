@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useData } from 'vitepress';
 import { getUserBrowserLanguage } from '../../helpers/browser';
 import { hostname } from '../../constants/meta';
@@ -9,21 +9,33 @@ const { site, localeIndex } = useData();
 const { primary, all } = getUserBrowserLanguage();
 const locales = Object.keys(site.value.locales);
 
-if (primary !== localeIndex.value) {
-  all.every((lang) => {
-    if (locales.includes(lang)) {
-      const { redirectTemplate, label } = site.value.locales[lang] as any;
-      if (redirectTemplate) {
-        redirect.value = redirectTemplate.replace(
-          ':locale',
-          `<a href="${hostname}/${lang}/" hreflang="${lang}">${hostname}/${lang}/</a>`
-        );
+const init = () => {
+  if (primary !== localeIndex.value) {
+    all.every((lang) => {
+      if (locales.includes(lang)) {
+        const { redirectTemplate, label } = site.value.locales[lang] as any;
+        if (redirectTemplate) {
+          redirect.value = redirectTemplate.replace(
+            ':locale',
+            `<a href="${hostname}/${lang}/" hreflang="${lang}">${hostname}/${lang}/</a>`
+          );
+        }
+        return false;
       }
-      return false;
-    }
-    return true;
-  });
-}
+      return true;
+    });
+  } else {
+    redirect.value = null;
+  }
+};
+
+onMounted(() => {
+  init();
+});
+
+watch([localeIndex], () => {
+  init();
+});
 </script>
 
 <template>
