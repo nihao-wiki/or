@@ -16,6 +16,10 @@ const { $t } = useLocale();
 const isModalVisible = ref(false);
 const { all } = getUserBrowserLanguage();
 
+const localeIndexCurrent = computed(() =>
+  localeIndex.value === 'root' ? langRoot : localeIndex.value
+);
+
 const currentLang = computed(() => ({
   label: site.value.locales[localeIndex.value]?.label,
   link:
@@ -40,7 +44,7 @@ const localeLinks = computed(() =>
 
 const suggestedLocaleLinks = computed(() => {
   const links: any[] = [];
-  localeLinks.value.forEach(locale => {
+  localeLinks.value.forEach((locale) => {
     const i = all.indexOf(locale.lang);
     if (i > -1) {
       links[i] = locale;
@@ -81,8 +85,15 @@ const updateCurrency = (shortname) => () => {
             <div class="label">{{ $t('Suggested region and language') }}</div>
             <div class="container">
               <template v-for="locale in suggestedLocaleLinks" :key="locale.link">
-                <a :href="locale.link" :hreflang="locale.lang" :onClick="closeModal"
-                  ><div class="button" v-if="all.includes(locale.lang)">
+                <a
+                  :href="localeIndexCurrent === locale.lang ? undefined : locale.link"
+                  :hreflang="locale.lang"
+                  :onClick="localeIndexCurrent === locale.lang ? undefined : closeModal"
+                  ><div
+                    class="button"
+                    :class="{ active: localeIndexCurrent === locale.lang }"
+                    v-if="all.includes(locale.lang)"
+                  >
                     <div class="region">{{ locale.region }}</div>
                     <div class="language">{{ locale.text }}</div>
                   </div>
@@ -92,8 +103,15 @@ const updateCurrency = (shortname) => () => {
             <div class="label">{{ $t('Choose a region and language') }}</div>
             <div class="container">
               <template v-for="locale in localeLinks" :key="locale.link">
-                <a :href="locale.link" :hreflang="locale.lang" :onClick="closeModal"
-                  ><div class="button" v-if="all.includes(locale.lang)">
+                <a
+                  :href="localeIndexCurrent === locale.lang ? undefined : locale.link"
+                  :hreflang="locale.lang"
+                  :onClick="localeIndexCurrent === locale.lang ? undefined : closeModal"
+                  ><div
+                    class="button"
+                    :class="{ active: localeIndexCurrent === locale.lang }"
+                    v-if="all.includes(locale.lang)"
+                  >
                     <div class="region">{{ locale.region }}</div>
                     <div class="language">{{ locale.text }}</div>
                   </div>
@@ -104,10 +122,10 @@ const updateCurrency = (shortname) => () => {
           <TabPanel :title="$t('Currency')">
             <div class="label">{{ $t('Choose a currency') }}</div>
             <div class="container">
-              <template v-for="(currency, shortname) in currencies" :key="currency.name">
-                <a :onClick="updateCurrency(shortname)"
-                  ><div class="button">
-                    <div class="region">{{ currency.name }}</div>
+              <template v-for="(cur, shortname) in currencies" :key="cur.name">
+                <a :onClick="currency === shortname ? undefined : updateCurrency(shortname)"
+                  ><div class="button" :class="{ active: currency === shortname }">
+                    <div class="region">{{ cur.name }}</div>
                     <div class="language">{{ shortname }}</div>
                   </div>
                 </a>
@@ -176,9 +194,14 @@ const updateCurrency = (shortname) => () => {
   padding: 11px 8px;
 }
 
-.button:hover {
+.button:hover,
+.button.active {
   background-color: #000;
   color: #fff;
+}
+
+.button.active {
+  cursor: default;
 }
 
 .region {
