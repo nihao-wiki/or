@@ -1,7 +1,18 @@
-import { defineConfig } from 'vitepress';
+import { defineConfigWithTheme } from 'vitepress';
+import type { UserConfig } from 'vitepress';
+import type { DefaultTheme } from 'vitepress/theme';
 import { fileURLToPath, URL } from 'node:url';
 import { getLang, getLocalesRewrite, getHreflang, getLocales } from './utils';
 import { title, hostname } from '../constants/meta';
+
+export interface ThemeConfig extends DefaultTheme.Config {
+  i18n: {
+    [key: string]: string;
+  };
+}
+
+export const defineConfig = (userConfig: UserConfig<ThemeConfig>): UserConfig<ThemeConfig> =>
+  userConfig;
 
 export default defineConfig({
   lang: getLang(),
