@@ -16,8 +16,6 @@ const { $t } = useLocale();
 const isModalVisible = ref(false);
 const { all } = getUserBrowserLanguage();
 
-console.log('locale', $t);
-
 const currentLang = computed(() => ({
   label: site.value.locales[localeIndex.value]?.label,
   link:
@@ -39,6 +37,17 @@ const localeLinks = computed(() =>
       ) + hash.value,
   }))
 );
+
+const suggestedLocaleLinks = computed(() => {
+  const links: any[] = [];
+  localeLinks.value.forEach(locale => {
+    const i = all.indexOf(locale.lang);
+    if (i > -1) {
+      links[i] = locale;
+    }
+  });
+  return links.filter(Boolean);
+});
 
 const openModal = () => {
   isModalVisible.value = true;
@@ -71,7 +80,7 @@ const updateCurrency = (shortname) => () => {
           <TabPanel :title="$t('Region and Language')">
             <div class="label">{{ $t('Suggested region and language') }}</div>
             <div class="container">
-              <template v-for="locale in localeLinks" :key="locale.link">
+              <template v-for="locale in suggestedLocaleLinks" :key="locale.link">
                 <a :href="locale.link" :hreflang="locale.lang" :onClick="closeModal"
                   ><div class="button" v-if="all.includes(locale.lang)">
                     <div class="region">{{ locale.region }}</div>
